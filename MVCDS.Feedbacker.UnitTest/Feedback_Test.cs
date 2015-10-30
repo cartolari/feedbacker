@@ -9,14 +9,25 @@ namespace MVCDS.Feedbacker.UnitTest
     public class Feedback_Test
     {
         [TestMethod]
-        public void Checks_Empty_Feedback()
+        public void Checks_Empty_On_Forced_Feedback()
         {
-            lib.Feedback feedback = new lib.Feedback();
+            lib.Feedback feedback = new lib.Feedback(true);
             Assert.IsFalse(feedback.Success);
 
-            lib.IResult warning = feedback.Results
+            lib.IResult result = feedback.Results
                 .FirstOrDefault();
-            Assert.IsNotNull(warning);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void Checks_Empty_On_Non_Forced_Feedback()
+        {
+            lib.Feedback feedback = new lib.Feedback();
+            Assert.IsTrue(feedback.Success);
+
+            lib.IResult result = feedback.Results
+                .FirstOrDefault();
+            Assert.IsNull(result);
         }
     }
 }

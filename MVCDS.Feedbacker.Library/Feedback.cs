@@ -8,8 +8,9 @@ namespace MVCDS.Feedbacker.Library
 {
     public class Feedback
     {
-        public Feedback()
+        public Feedback(bool force = false)
         {
+            this.force = force;
             results = new List<IResult>();
         }
 
@@ -18,12 +19,23 @@ namespace MVCDS.Feedbacker.Library
         {
             get
             {
-                if (results.Any())
-                    return results.ToArray();
+                if (ErrorOnEmpty)
+                {
+                    return new IResult[] {
+                        new EmptyFeedbackException()
+                    };
+                }
 
-                return new IResult[] {
-                    new EmptyFeedbackException()
-                };
+                return results.ToArray();
+            }
+        }
+
+        private readonly bool force;
+        private bool ErrorOnEmpty
+        {
+            get
+            {
+                return force == true && !results.Any();
             }
         }
 
