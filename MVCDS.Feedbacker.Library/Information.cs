@@ -28,7 +28,7 @@ namespace MVCDS.Feedbacker.Library
         }
     }
 
-    public class Information<T> : Information
+    public class Information<T> : Information, IValue<T>
     {
         internal Information(string message, T value)
             : base (message)

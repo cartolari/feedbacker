@@ -58,4 +58,21 @@ namespace MVCDS.Feedbacker.Library
 
         public Exception Information { get; private set; }
     }
+
+    public class Error<T>: Error, IValue<T>
+    {
+        internal Error(string message, T value)
+            : base(message)
+        {
+            Value = value;
+        }
+
+        internal Error(Exception exception, T value)
+            : base(exception)
+        {
+            Value = value;
+        }
+
+        public T Value { get; private set; }
+    }
 }

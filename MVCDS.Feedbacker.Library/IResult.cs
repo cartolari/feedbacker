@@ -12,4 +12,9 @@ namespace MVCDS.Feedbacker.Library
         DateTime Date { get; }
         bool TriggersFailure { get; }
     }
+
+    public interface IValue<T>
+    {
+        T Value { get; }
+    }
 }
