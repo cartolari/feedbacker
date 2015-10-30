@@ -2,6 +2,9 @@
 
 namespace MVCDS.Feedbacker.Library
 {
+    /// <summary>
+    /// It triggers failure for a feedback
+    /// </summary>
     public class Error : IResult
     {
         internal Error(string message)
@@ -23,8 +26,14 @@ namespace MVCDS.Feedbacker.Library
             Date = DateTime.Now;
         }
 
+        /// <summary>
+        /// When the error was created
+        /// </summary>
         public DateTime Date { get; private set; }
         
+        /// <summary>
+        /// All exceptions messages gathered on a string
+        /// </summary>
         public string Message
         {
             get
@@ -44,6 +53,9 @@ namespace MVCDS.Feedbacker.Library
                 + Read(information.InnerException, n + 1);
         }
 
+        /// <summary>
+        /// As an error, it always triggers the feedback's failure
+        /// </summary>
         public bool TriggersFailure
         {
             get
@@ -52,9 +64,15 @@ namespace MVCDS.Feedbacker.Library
             }
         }
 
+        /// <summary>
+        /// All exceptions gathered for dig more information
+        /// </summary>
         public Exception Information { get; private set; }
     }
 
+    /// <summary>
+    /// It triggers failure for a feedback and holds a value for some aditional information
+    /// </summary>
     public class Error<T>: Error, IValue<T>
     {
         internal Error(string message, T value)
@@ -69,6 +87,9 @@ namespace MVCDS.Feedbacker.Library
             Value = value;
         }
 
+        /// <summary>
+        /// Information about the error
+        /// </summary>
         public T Value { get; private set; }
     }
 }
