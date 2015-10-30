@@ -11,7 +11,7 @@ namespace MVCDS.Feedbacker.UnitTest
         [TestMethod]
         public void Checks_Empty_On_Forced_Feedback()
         {
-            lib.Feedback feedback = new lib.Feedback(true);
+            lib.Feedback feedback = new lib.Feedback(lib.Feedback.EmptyResult.Forbid);
             Assert.IsFalse(feedback.Success);
 
             lib.IResult result = feedback.Results

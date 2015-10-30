@@ -8,7 +8,13 @@ namespace MVCDS.Feedbacker.Library
 {
     public class Feedback
     {
-        public Feedback(bool force = false)
+        public enum EmptyResult
+        {
+            Allow,
+            Forbid
+        }
+
+        public Feedback(EmptyResult force = EmptyResult.Allow)
         {
             this.force = force;
             results = new List<IResult>();
@@ -30,12 +36,12 @@ namespace MVCDS.Feedbacker.Library
             }
         }
 
-        private readonly bool force;
+        private readonly EmptyResult force;
         private bool ErrorOnEmpty
         {
             get
             {
-                return force == true && !results.Any();
+                return force == EmptyResult.Forbid && !results.Any();
             }
         }
 
