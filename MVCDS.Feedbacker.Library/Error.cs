@@ -10,9 +10,9 @@ namespace MVCDS.Feedbacker.Library
     {
         internal Error(string message)
         {
-            message = ValidateMessage(message);
+            MessageValidator.Assert(message);
 
-            Information = new Exception(message);
+            Information = new Exception(message.Trim());
             Date = DateTime.Now;
         }
 
@@ -21,7 +21,7 @@ namespace MVCDS.Feedbacker.Library
             if (exception == null)
                 throw new ArgumentNullException("Exception cannot be null");
 
-            ValidateMessage(exception.Message);
+            MessageValidator.Assert(exception.Message);
 
             Information = exception;
             Date = DateTime.Now;
@@ -57,16 +57,5 @@ namespace MVCDS.Feedbacker.Library
         }
 
         public Exception Information { get; private set; }
-
-        private string ValidateMessage(string message)
-        {
-            if (message == null)
-                throw new ArgumentNullException("The message cannot be null");
-
-            message = message.Trim();
-            if (string.IsNullOrWhiteSpace(message))
-                throw new ArgumentException("The message cannot be empty");
-            return message;
-        }
     }
 }

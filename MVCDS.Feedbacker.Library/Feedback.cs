@@ -64,5 +64,17 @@ namespace MVCDS.Feedbacker.Library
             results.Add(new Error(message));
             return this;
         }
+
+        public Feedback Inform(string message)
+        {
+            results.Add(new Information(message));
+            return this;
+        }
+
+        public Feedback Inform<T>(string message, T value)
+        {
+            results.Add(new Information<T>(message, value));
+            return this;
+        }
     }
 }
