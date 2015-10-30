@@ -65,6 +65,18 @@ namespace MVCDS.Feedbacker.Library
             return this;
         }
 
+        public Feedback Error<T>(Exception exception, T value)
+        {
+            results.Add(new Error<T>(exception, value));
+            return this;
+        }
+
+        public Feedback Error<T>(string message, T value)
+        {
+            results.Add(new Error<T>(message, value));
+            return this;
+        }
+
         public Feedback Inform(string message)
         {
             results.Add(new Information(message));
@@ -74,6 +86,30 @@ namespace MVCDS.Feedbacker.Library
         public Feedback Inform<T>(string message, T value)
         {
             results.Add(new Information<T>(message, value));
+            return this;
+        }
+
+        public Feedback Observe(string message, bool failure = false)
+        {
+            results.Add(new Observation(message, failure));
+            return this;
+        }
+
+        public Feedback Observe(string message, Func<bool> failure)
+        {
+            results.Add(new Observation(message, failure));
+            return this;
+        }
+
+        public Feedback Observe<T>(string message, T value, bool failure = false)
+        {
+            results.Add(new Observation<T>(message, failure, value));
+            return this;
+        }
+
+        public Feedback Observe<T>(string message, T value, Func<bool> failure)
+        {
+            results.Add(new Observation<T>(message, failure, value));
             return this;
         }
     }
