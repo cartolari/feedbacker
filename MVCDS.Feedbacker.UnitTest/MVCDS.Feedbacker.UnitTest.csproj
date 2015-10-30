@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Feedback_Test.cs" />
+    <Compile Include="Error_Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MVCDS.Feedbacker.Library\MVCDS.Feedbacker.Library.csproj">

@@ -28,7 +28,7 @@ namespace MVCDS.Feedbacker.Library
                 if (ErrorOnEmpty)
                 {
                     return new IResult[] {
-                        new EmptyFeedbackException()
+                        new Error("This feedback cannot be empty")
                     };
                 }
 
@@ -51,6 +51,18 @@ namespace MVCDS.Feedbacker.Library
             {
                 return !Results.Any(p => p.TriggersFailure);
             }
+        }
+
+        public Feedback Error(Exception exception)
+        {
+            results.Add(new Error(exception));
+            return this;
+        }
+
+        public Feedback Error(string message)
+        {
+            results.Add(new Error(message));
+            return this;
         }
     }
 }
