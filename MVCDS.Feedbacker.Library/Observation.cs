@@ -21,11 +21,6 @@ namespace MVCDS.Feedbacker.Library
         }
 
         /// <summary>
-        /// When the observation was created
-        /// </summary>
-        public DateTime Date { get; private set; }
-
-        /// <summary>
         /// The observation itself
         /// </summary>
         public string Message { get; private set; }
@@ -34,7 +29,7 @@ namespace MVCDS.Feedbacker.Library
         /// <summary>
         /// As an observation, it may be contextual if it will trigger the feedback's failure or not
         /// </summary>
-        public bool TriggersFailure
+        public override bool TriggersFailure
         {
             get
             {

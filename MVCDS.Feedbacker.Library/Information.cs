@@ -7,27 +7,30 @@ namespace MVCDS.Feedbacker.Library
     /// </summary>
     public class Information : Result
     {
+
         internal Information(string message)
         {
             MessageValidator.Assert(message);
 
-            Message = message.Trim();
+            this.message = message.Trim();
         }
 
-        /// <summary>
-        /// When the information was created
-        /// </summary>
-        public DateTime Date { get; private set; }
-
+        readonly private string message;
         /// <summary>
         /// The information itself
         /// </summary>
-        public string Message { get; private set; }
+        public override string Message
+        {
+            get
+            {
+                return message;
+            }
+        }
 
         /// <summary>
         /// As an information, it never triggers the feedback's failure
         /// </summary>
-        public bool TriggersFailure
+        public override bool TriggersFailure
         {
             get
             {

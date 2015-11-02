@@ -2,11 +2,24 @@
 
 namespace MVCDS.Feedbacker.Library
 {
-    public class Result
+    /// <summary>
+    /// A feedback part
+    /// </summary>
+    public abstract class Result
     {
-        public string Message { get; }
+        protected Result()
+        {
+            Date = DateTime.Now;
+        }
+
+        public virtual string Message { get; }
+
+        /// <summary>
+        /// When the result was created
+        /// </summary>
         public DateTime Date { get; }
-        public bool TriggersFailure { get; }
+
+        public abstract bool TriggersFailure { get; }
     }
 
     public interface IValue<T>

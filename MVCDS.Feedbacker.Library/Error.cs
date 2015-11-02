@@ -12,7 +12,6 @@ namespace MVCDS.Feedbacker.Library
             MessageValidator.Assert(message);
 
             Information = new Exception(message.Trim());
-            Date = DateTime.Now;
         }
 
         internal Error(Exception exception)
@@ -23,18 +22,12 @@ namespace MVCDS.Feedbacker.Library
             MessageValidator.Assert(exception.Message);
 
             Information = exception;
-            Date = DateTime.Now;
         }
-
-        /// <summary>
-        /// When the error was created
-        /// </summary>
-        public DateTime Date { get; private set; }
         
         /// <summary>
         /// All exceptions messages gathered on a string
         /// </summary>
-        public string Message
+        public override string Message
         {
             get
             {
@@ -56,7 +49,7 @@ namespace MVCDS.Feedbacker.Library
         /// <summary>
         /// As an error, it always triggers the feedback's failure
         /// </summary>
-        public bool TriggersFailure
+        public override bool TriggersFailure
         {
             get
             {
