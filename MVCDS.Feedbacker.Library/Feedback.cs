@@ -65,7 +65,9 @@ namespace MVCDS.Feedbacker.Library
                     };
                 }
 
-                return results.ToArray();
+                return results
+                    .Where(p => p != null)
+                    .ToArray();
             }
         }
 
