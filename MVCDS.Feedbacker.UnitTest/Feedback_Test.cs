@@ -13,7 +13,7 @@ namespace MVCDS.Feedbacker.UnitTest
             lib.Feedback feedback = new lib.Feedback(lib.Feedback.EmptyResult.Forbid);
             Assert.IsFalse(feedback.Success);
 
-            lib.IResult result = feedback.Results
+            lib.Result result = feedback.Results
                 .FirstOrDefault();
             Assert.IsNotNull(result);
         }
@@ -24,7 +24,7 @@ namespace MVCDS.Feedbacker.UnitTest
             lib.Feedback feedback = new lib.Feedback();
             Assert.IsTrue(feedback.Success);
 
-            lib.IResult result = feedback.Results
+            lib.Result result = feedback.Results
                 .FirstOrDefault();
             Assert.IsNull(result);
         }

@@ -5,7 +5,7 @@ namespace MVCDS.Feedbacker.Library
     /// <summary>
     /// It may triggers failure for a feedback
     /// </summary>
-    public class Observation : IResult
+    public class Observation : Result
     {
         internal Observation(string message, bool isFailure)
             : this(message, () => isFailure)

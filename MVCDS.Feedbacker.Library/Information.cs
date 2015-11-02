@@ -5,7 +5,7 @@ namespace MVCDS.Feedbacker.Library
     /// <summary>
     /// It doesn't trigger failure for a feedback
     /// </summary>
-    public class Information : IResult
+    public class Information : Result
     {
         internal Information(string message)
         {

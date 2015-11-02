@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace MVCDS.Feedbacker.Library
 {
+    [Serializable]
     /// <summary>
     /// Should be read to inform about a proccess
     /// </summary>
@@ -20,28 +22,45 @@ namespace MVCDS.Feedbacker.Library
         }
 
         /// <summary>
+        /// Creates an instace of a feedback
+        /// </summary>
+        public Feedback()
+            : this(EmptyResult.Allow)
+        {
+        }
+
+        /// <summary>
         /// Creates an instance of a feedback
         /// </summary>
         /// <param name="force">Controls if the feedback is able to succeed without any results.
-        /// The default is <code>Allow</code></param>
-        public Feedback(EmptyResult force = EmptyResult.Allow)
+        public Feedback(EmptyResult force)
         {
             this.force = force;
-            results = new List<IResult>();
+            results = new List<Result>();
         }
 
-        private readonly List<IResult> results;
+        /// <summary>
+        /// Creates an instance of a feedback 
+        /// </summary>
+        /// <param name="info">Data of serialization</param>
+        /// <param name="context">Source of the feedback</param>
+        public Feedback(SerializationInfo info, StreamingContext context)
+        {
+            results = (List<Result>)info.GetValue("result", typeof(List<Result>));
+        }
+
+        private readonly List<Result> results;
         /// <summary>
         /// Returns all the results the feedback has received
         /// When it's empty and the instance forbis empy results, the instance returns an error 
         /// </summary>
-        public IResult[] Results
+        public Result[] Results
         {
             get
             {
                 if (ErrorOnEmpty)
                 {
-                    return new IResult[] {
+                    return new Result[] {
                         new Error("This feedback cannot be empty")
                     };
                 }
@@ -69,6 +88,12 @@ namespace MVCDS.Feedbacker.Library
                 return !Results.Any(p => p.TriggersFailure);
             }
         }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("results", results, typeof(List<Result>));
+        }
+
 
         /// <summary>
         /// Add an error
