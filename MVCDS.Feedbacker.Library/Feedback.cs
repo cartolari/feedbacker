@@ -220,5 +220,49 @@ namespace MVCDS.Feedbacker.Library
             results.Add(new Observation<T>(message, failure, value));
             return this;
         }
+
+        /// <summary>
+        /// Add all the results from the source
+        /// </summary>
+        /// <param name="source">The feedback which will feed this instance</param>
+        /// <returns>The instance to be chained</returns>
+        public Feedback Feed(Feedback source)
+        {
+            results.AddRange(source.Results);
+            return this;
+        }
+
+        /// <summary>
+        /// Add a non-standard result
+        /// </summary>
+        /// <param name="result">The result which will be added to this instance</param>
+        /// <returns>The instance to be chained</returns>
+        public Feedback Feed(Result result)
+        {
+            results.Add(result);
+            return this;
+        }
+
+        /// <summary>
+        /// Add non-standard results
+        /// </summary>
+        /// <param name="values">The results which will be added to this instance</param>
+        /// <returns>The instance to be chained</returns>
+        public Feedback Feed(params Result[] values)
+        {
+            results.AddRange(values);
+            return this;
+        }
+
+        /// <summary>
+        /// Add non-standard results
+        /// </summary>
+        /// <param name="values">The results which will be added to this instance</param>
+        /// <returns>The instance to be chained</returns>
+        public Feedback Feed(IEnumerable<Result> values)
+        {
+            results.AddRange(values);
+            return this;
+        }
     }
 }
