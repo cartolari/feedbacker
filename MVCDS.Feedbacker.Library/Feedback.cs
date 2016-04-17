@@ -11,6 +11,8 @@ namespace MVCDS.Feedbacker.Library
     /// </summary>
     public class Feedback
     {
+        public const string EMPTY_FEEDBACK = "This feedback cannot be empty";
+
         /// <summary>
         /// When <value>Allow</value> is set, the feedback is able to succeed even when there's no results to read
         /// If otherwise, the feedback will fail without at least one result
@@ -59,11 +61,7 @@ namespace MVCDS.Feedbacker.Library
             get
             {
                 if (ErrorOnEmpty)
-                {
-                    return new Result[] {
-                        new Error("This feedback cannot be empty")
-                    };
-                }
+                    throw new Exception(EMPTY_FEEDBACK);
 
                 return results
                     .Where(p => p != null)
@@ -87,7 +85,27 @@ namespace MVCDS.Feedbacker.Library
         {
             get
             {
-                return !Results.Any(p => p.TriggersFailure);
+                return !Bad.Any();
+            }
+        }
+
+        public Result[] Bad
+        {
+            get
+            {
+                return Results
+                    .Where(p => p.TriggersFailure)
+                    .ToArray();
+            }
+        }
+
+        public Result[] Good
+        {
+            get
+            {
+                return Results
+                    .Where(p => !p.TriggersFailure)
+                    .ToArray();
             }
         }
 
