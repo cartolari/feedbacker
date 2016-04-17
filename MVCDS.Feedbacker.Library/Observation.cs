@@ -16,14 +16,24 @@ namespace MVCDS.Feedbacker.Library
         {
             MessageValidator.Assert(message);
 
-            Message = message.Trim();
+            this.message = message.Trim();
             callback = isFailure;
         }
 
         /// <summary>
         /// The observation itself
         /// </summary>
-        public string Message { get; private set; }
+        readonly private string message;
+        /// <summary>
+        /// The information itself
+        /// </summary>
+        public override string Message
+        {
+            get
+            {
+                return message;
+            }
+        }
 
         Func<bool> callback;
         /// <summary>
